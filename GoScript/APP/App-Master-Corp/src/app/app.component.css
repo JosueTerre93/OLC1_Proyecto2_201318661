@@ -1,0 +1,19 @@
+.toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  background-color: #000000;
+  color: white;
+  font-weight: 600;
+}
+
+h2 {
+  text-align: center;
+  display: block;
+  letter-spacing: 5px;
+  margin: auto;
+}

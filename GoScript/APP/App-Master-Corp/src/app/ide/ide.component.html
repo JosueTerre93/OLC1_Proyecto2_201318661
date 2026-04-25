@@ -1,0 +1,131 @@
+<div class="ide-container">
+  <!-- Header -->
+  <header class="ide-header">
+    <div class="header-left">
+      <div class="logo-box">
+        <i class="bi bi-lightning-charge-fill"></i>
+      </div>
+      <div class="brand">
+        <h1>GoScript IDE</h1>
+        <span>Interpreter v1.0.0</span>
+      </div>
+    </div>
+    
+    <div class="header-right">
+      <input type="file" id="file-input" name="file-input" #fileInput style="display: none;" accept=".gst" (change)="onFileSelected($event)">
+      <button class="btn btn-dark-upload" (click)="fileInput.click()">
+        <i class="bi bi-upload"></i> Abrir .gst
+      </button>
+      <button class="btn btn-primary-run" (click)="runCode()">
+        <i class="bi bi-play-fill"></i> Run
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Workspace -->
+  <main class="ide-workspace">
+    <!-- Editor Panel -->
+    <section class="panel editor-panel">
+      <div class="panel-header">
+        <i class="bi bi-code-slash"></i> EDITOR DE CODIGO
+      </div>
+      <div class="panel-body editor-wrapper">
+        <div class="line-numbers">
+          <div *ngFor="let n of lineNumbers">{{ n }}</div>
+        </div>
+        <textarea id="code-editor" name="code-editor" class="code-editor" [(ngModel)]="codeEditorContent" (scroll)="syncScroll($event)" #editorTextArea spellcheck="false"></textarea>
+      </div>
+    </section>
+
+    <!-- Right Panels -->
+    <section class="right-column">
+      <div class="panel tabs-panel">
+        <div class="tabs-header">
+          <button class="tab-btn" [class.active]="activeTab === 'console'" (click)="activeTab = 'console'"><i class="bi bi-terminal"></i> Consola</button>
+          <button class="tab-btn" [class.active]="activeTab === 'symbols'" (click)="activeTab = 'symbols'"><i class="bi bi-table"></i> Tabla de Símbolos  </button>
+          <button class="tab-btn" [class.active]="activeTab === 'errors'" (click)="activeTab = 'errors'"><i class="bi bi-bug"></i> Errores</button>
+          <button class="tab-btn" [class.active]="activeTab === 'ast'" (click)="activeTab = 'ast'"><i class="bi bi-diagram-3"></i> Árbol AST</button>
+        </div>
+        <div class="tab-content">
+          
+          <!-- Console Tab -->
+          <div *ngIf="activeTab === 'console'" class="console-body">
+            <pre class="console-text">{{ consoleOutput }}</pre>
+          </div>
+          
+          <!-- Symbols Tab -->
+          <div *ngIf="activeTab === 'symbols'" class="table-body">
+            <table class="symbol-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Tipo Símbolo</th>
+                  <th>Tipo Dato</th>
+                  <th>Ámbito</th>
+                  <th>Línea</th>
+                  <th>Columna</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of reporteTablaSimbolos">
+                  <td>{{ item.id }}</td>
+                  <td>{{ item.tipoEntidad }}</td>
+                  <td>{{ item.tipoDato }}</td>
+                  <td>{{ item.entorno }}</td>
+                  <td>{{ item.linea }}</td>
+                  <td>{{ item.columna }}</td>
+                </tr>
+                <tr *ngIf="reporteTablaSimbolos.length === 0">
+                  <td colspan="6" class="text-center empty-state">No se han encontrado símbolos. :D</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Errors Tab -->
+          <div *ngIf="activeTab === 'errors'" class="table-body">
+            <table class="symbol-table error-table">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Descripción</th>
+                  <th>Línea</th>
+                  <th>Columna</th>
+                  <th>Tipo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let err of errorTable; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ err.descripcion }}</td>
+                  <td>{{ err.linea }}</td>
+                  <td>{{ err.columna }}</td>
+                  <td>{{ err.tipoError }}</td>
+                </tr>
+                <tr *ngIf="errorTable.length === 0">
+                  <td colspan="5" class="text-center empty-state" style="color: var(--matrix-glow);">No se encontraron errores. :D  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- AST Tab -->
+          <div *ngIf="activeTab === 'ast'" class="ast-body h-100" style="overflow: auto; display: flex; justify-content: center; align-items: flex-start; padding: 20px;">
+            <img *ngIf="astImageUrl" [src]="astImageUrl" alt="AST Graph" style="border-radius: 8px; box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);" />
+            <div *ngIf="!astImageUrl" class="empty-state">Compile el codigo para generar el arbol de sintaxis abstracta </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="ide-footer">
+    <div class="footer-left">
+      <div class="status-indicator"></div>
+      <span class="status-text">server connected: localhost:5000</span>
+      <span class="status-text ml-3">interpreter status: ready</span>
+    </div>
+  </footer>
+</div>

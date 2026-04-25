@@ -1,0 +1,49 @@
+.cuadrado_fondo
+{
+    width: 800px; 
+    height: 800px; 
+    background: #6592CF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rectangulo
+{
+    width: 600px; 
+    height: 300px; 
+    background: #243D83;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circulo_transparente
+{
+    width: 500px; 
+    height: 500px; 
+    background: #6592CF;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circulo_azul
+{
+    width: 300px; 
+    height: 300px; 
+    background: #243D83;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circulo_amarillo
+{
+    width: 100px; 
+    height: 100px; 
+    background: #EEB850;
+    border-radius: 50%;
+}

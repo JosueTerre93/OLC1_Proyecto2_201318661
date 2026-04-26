@@ -5,6 +5,10 @@
   height: 100vh;
   width: 100vw;
   background-color: #000000;
+  background-image: url('/assets/matrix.gif');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   /* Pure black matrix bg */
   color: #00FF41;
   /* Neon tech green */
@@ -19,7 +23,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 12px 24px;
-  background-color: #040d04;
+  background-color: rgba(4, 13, 4, 0.85);
   /* Very dark green almost black */
   border-bottom: 1px solid #00FF41;
   height: 70px;
@@ -107,15 +111,15 @@
 .ide-workspace {
   flex: 1;
   display: grid;
-  grid-template-columns: 65% 35%;
-  gap: 15px;
-  padding: 15px;
+  grid-template-columns: 60% 40%;
+  gap: 10px;
+  padding: 10px;
   box-sizing: border-box;
   overflow: hidden;
 }
 
 .panel {
-  background-color: rgba(0, 15, 0, 0.9);
+  background-color: rgba(0, 15, 0, 0.65);
   border-radius: 4px;
   border: 1px solid #008F11;
   display: flex;
@@ -149,13 +153,14 @@
   display: flex;
   height: 100%;
   padding: 0 !important;
-  background-color: #000000;
+  background-color: rgba(0, 0, 0, 0.65);
 }
 
 .line-numbers {
-  width: 45px;
-  padding: 15px 5px;
-  background-color: #051405;
+  min-width: 30px;
+  width: fit-content;
+  padding: 15px 8px;
+  background-color: rgba(5, 20, 5, 0.65);
   border-right: 1px solid #008F11;
   color: #008F11;
   font-family: 'Courier New', Courier, monospace;
@@ -203,7 +208,7 @@
 
 .tabs-header {
   display: flex;
-  background-color: rgba(0, 15, 0, 0.9);
+  background-color: rgba(0, 15, 0, 0.65);
   border-bottom: 1px solid #008F11;
   height: 45px;
   box-sizing: border-box;
@@ -246,15 +251,17 @@
   overflow-y: auto !important;
   overflow-x: auto;
   padding: 0;
-  background-color: #000000;
+  background-color: rgba(0, 0, 0, 0.65);
 }
 
 /* ---------- Console Content ---------- */
 .console-body {
-  background-color: #000000;
+  background-color: transparent;
   padding: 15px;
-  overflow: auto;
-  border: 1px solid #003300;
+  min-width: 100%;
+  min-height: 100%;
+  display: inline-block;
+  box-sizing: border-box;
 }
 
 .console-text {
@@ -262,9 +269,8 @@
   font-family: 'Courier New', Courier, monospace;
   font-size: 14px;
   margin: 0;
-  white-space: pre; /* Changed to pre to allow horizontal scroll */
+  white-space: pre; 
   text-shadow: 0 0 6px rgba(0, 255, 65, 0.6);
-  min-height: 100%;
 }
 
 /* ---------- Symbol Table Content ---------- */
@@ -314,7 +320,7 @@
 /* ----------------- Footer ----------------- */
 .ide-footer {
   height: 35px;
-  background-color: #001100;
+  background-color: rgba(0, 17, 0, 0.85);
   border-top: 1px solid #00FF41;
   display: flex;
   justify-content: space-between;

@@ -2,10 +2,10 @@
 
 ## 1. Introducción y Objetivos
 
-Este documento constituye el manual técnico del proyecto **Intérprete de GoScript**, desarrollado como parte del curso de Organización de Lenguajes y Compiladores 1. El objetivo principal de este proyecto es la construcción de un analizador léxico, sintáctico y semántico capaz de interpretar y ejecutar un subconjunto de instrucciones basadas en el lenguaje Go (denominado "GoScript").
+Este documento constituye el manual técnico del proyecto **GoScript**, desarrollado como parte del curso de Organización de Lenguajes y Compiladores 1. El objetivo principal de este proyecto es la construcción de un analizador léxico, sintáctico y semántico capaz de interpretar y ejecutar un subconjunto de instrucciones basadas en el lenguaje Go (denominado "GoScript").
 
 ### Objetivos Específicos:
-- Implementar un **Frontend** robusto y amigable utilizando **Angular**, que permita la edición de código, visualización de consola, reportes de tabla de símbolos, tabla de errores y la visualización gráfica del Árbol de Sintaxis Abstracta (AST).
+- Implementar un copilador para el lenguaje **GoScript** que permita la edición de código, visualización de consola, reportes de tabla de símbolos, tabla de errores y la visualización gráfica del Árbol de Sintaxis Abstracta (AST).
 - Construir un analizador léxico y sintáctico mediante la herramienta **Jison**.
 - Diseñar un **Árbol de Sintaxis Abstracta (AST)** mediante el patrón de diseño *Intérprete* para la ejecución recursiva del código fuente.
 - Manejar de forma estricta los entornos dinámicos (Scopes) y la **Tabla de Símbolos** durante el tiempo de ejecución.
@@ -28,7 +28,6 @@ La lógica del compilador reside en las carpetas de análisis y abstracción (de
 - **Analizador**: Construido con Jison, toma la cadena de entrada del editor y la convierte en una estructura de datos abstracta.
 - **Intérprete**: Recorre el árbol generado por el analizador ejecutando cada instrucción según sus reglas semánticas, inyectando los resultados o errores a una clase estática compartida (`Contexto` o retorno directo) que luego el Frontend lee para mostrarlos.
 
----
 
 ## 3. Análisis Léxico y Sintáctico
 
@@ -50,7 +49,6 @@ Ejemplo de flujo de producciones principales:
 
 El parser está configurado para tener precedencia y asociatividad izquierda en operadores matemáticos para resolver ambigüedades clásicas de las expresiones.
 
----
 
 ## 4. Diseño del Árbol de Sintaxis Abstracta (AST)
 
@@ -63,7 +61,6 @@ El núcleo del intérprete está modelado utilizando el patrón de diseño **Int
 ### 4.2. Generación Gráfica del AST
 El parser recolecta información de cada nodo generado. Para la visualización, el sistema aplica un recorrido recursivo por todos los nodos hijos del programa (usando el concepto de *Graphviz* / DOT) para concatenar las relaciones padre-hijo, y luego invoca un servicio externo (QuickChart) o librería nativa para transformar ese código DOT en una imagen renderizada en el Frontend.
 
----
 
 ## 5. Entornos y Tabla de Símbolos
 
@@ -83,7 +80,6 @@ Un símbolo almacena:
 
 Esta tabla luego es exportada y aplanada para mostrarse en el reporte visual de "Tabla de Símbolos" del IDE.
 
----
 
 ## 6. Sistema de Tipos y Manejo de Errores
 
@@ -101,7 +97,6 @@ Se gestiona mediante una clase Singleton (Tabla de Errores compartida):
 
 Todos se almacenan estructuradamente y se despliegan en la tabla del Frontend con su línea, columna y descripción.
 
----
 
 ## 7. Flujo de Ejecución
 
